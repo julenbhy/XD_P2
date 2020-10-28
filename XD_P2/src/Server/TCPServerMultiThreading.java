@@ -21,6 +21,8 @@ class TCPServerMultiThreading {
 	    
 		bufWriter.write("Se ha abierto el servidor a las " + dtf.format(now));
 		
+		//si no cerramos el writer no se guarda lo que escribimos
+		//no se si habra que abrirlo en cada hilo, porque el bucle es infinito
 		bufWriter.close();
 
 		while (true) {
