@@ -16,7 +16,7 @@ class TCPClient {
 		
 		hospitales = readArrayList(file);
 		
-		Socket clientSocket = new Socket("localhost", 6789);
+		Socket clientSocket = new Socket("localhost", 1234);
 		
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
