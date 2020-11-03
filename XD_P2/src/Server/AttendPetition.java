@@ -12,8 +12,7 @@ public class AttendPetition extends Thread{
 	}
 	
 	public void run(){
-		String clientSentence;
-		String capitalizedSentence;
+		ArrayList<String> clientSentence;
 		BufferedReader inFromClient;
 		
 		try {
