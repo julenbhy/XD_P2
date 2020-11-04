@@ -14,19 +14,22 @@ public class AttendPetition extends Thread{
 	
 	public void run(){
 
-		//ArrayList<String> clientSentence = new ArrayList<String>();
+		ArrayList<String> clientSentence = new ArrayList<String>();
 		BufferedReader inFromClient;
-		//String line;
+		String line;
 		
 		try {
 			inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 
+
 			
-			/*
-			while( (line = inFromClient.readLine() ) != null) {
+			while((line = inFromClient.readLine())!=null && !line.equals("@")){
 			    clientSentence.add(line);
 			}
+		    System.out.println("Received: " + clientSentence);
+			
+			
 			
 			int suma=0;
 			for (String str : clientSentence)
@@ -35,24 +38,16 @@ public class AttendPetition extends Thread{
 		    }
 			
 			suma = suma / clientSentence.size();
-			
-			
-			
-			clientSentence = inFromClient.readLine();
-			
-			System.out.println("Received: " + clientSentence);
-			
-			capitalizedSentence = clientSentence.toUpperCase() + '\n';
-			*/
-			
-			 mensaje = inFromClient.readLine();
-			System.out.println("mensaje:" + mensaje);
 
-			//outToClient.writeBytes(mensaje);
+			
+			outToClient.writeBytes(Integer.toString(suma) + '\n');
+
+			
 			
 			this.connectionSocket.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("Ha saltado la excepcion");
 			e.printStackTrace();
 		}		
 	}

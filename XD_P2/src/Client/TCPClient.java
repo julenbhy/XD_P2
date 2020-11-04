@@ -15,6 +15,7 @@ class TCPClient {
 		file = inFromUser.readLine();
 		
 		hospitales = readArrayList(file);
+		hospitales.add("@");
 		
 		Socket clientSocket = new Socket("localhost", 1234);
 		
@@ -23,8 +24,9 @@ class TCPClient {
 		
 		for (String str : hospitales)
 	    {
-			outToServer.writeBytes(str);
+			outToServer.writeBytes(str + '\n');
 	    }
+		
 		
 		answer = inFromServer.readLine();
 		
