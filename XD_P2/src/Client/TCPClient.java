@@ -10,9 +10,12 @@ class TCPClient {
 		ArrayList<String> hospitales;
 		String answer, file;
 		
-		System.out.println("Que archivo quieres leer? ");
+		System.out.println("Que región quieres leer? ");
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 		file = inFromUser.readLine();
+		
+		if(createFile(file)) createRegion(file);
+		
 		
 		hospitales = readArrayList(file);
 		//aÃ±adimos un centinela para que el servidor sepa cuando acaba el mensaje
@@ -47,6 +50,49 @@ class TCPClient {
 		s.close();
 		return list;
 	}
+	
+	//crea un fichero en el caso de que no existe y devuelve verdadero, si no es necesario devuelve falso
+	private static boolean createFile(String file) throws IOException
+	{
+		File myObj = new File(file);
+		if (myObj.createNewFile())return true;
+		else return false;
+	}
+	
+	private static void createRegion(String file) throws IOException
+	{
+		OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file));
+		BufferedWriter bufWriter = new BufferedWriter(writer);
+		
+		System.out.println("Esta región no existia, introduzca los datos de un hospital separados por espacios ");
+		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		String data = inFromUser.readLine();
+		bufWriter.write(data);
+		bufWriter.close();
+		boolean mas=true;
+		while(mas) {
+			System.out.println("Desea introducir datos de otro hospital");
+			inFromUser = new BufferedReader(new InputStreamReader(System.in));
+			String resp = inFromUser.readLine().toLowerCase();
+			if(resp.equals("si"))addHospital(file);
+			else mas=false;
+		}
+	}
+	
+	private static void addHospital(String file) throws IOException 
+	{
+		OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file));
+		BufferedWriter bufWriter = new BufferedWriter(writer);
+		System.out.println("Introduzca los datos de un hospital separados por espacios ");
+		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		String data = inFromUser.readLine();
+		bufWriter.newLine();
+		bufWriter.write(data);
+		bufWriter.close();
+	}
+
+		      
+	
 }
 
 
