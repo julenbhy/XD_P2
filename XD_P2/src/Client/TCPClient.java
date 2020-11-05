@@ -51,6 +51,15 @@ class TCPClient {
 		return list;
 	}
 	
+	private static void writeArrayList(String file, ArrayList<String> arr) throws IOException
+	{
+		FileWriter writer = new FileWriter(file); 
+		for(String str: arr) {
+		  writer.write(str + System.lineSeparator());
+		}
+		writer.close();
+	}
+	
 	//crea un fichero en el caso de que no existe y devuelve verdadero, si no es necesario devuelve falso
 	private static boolean createFile(String file) throws IOException
 	{
@@ -61,34 +70,32 @@ class TCPClient {
 	
 	private static void createRegion(String file) throws IOException
 	{
-		OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file));
-		BufferedWriter bufWriter = new BufferedWriter(writer);
-		
 		System.out.println("Esta región no existia, introduzca los datos de un hospital separados por espacios ");
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 		String data = inFromUser.readLine();
-		bufWriter.write(data);
-		bufWriter.close();
+		ArrayList<String> list = new ArrayList<String>();
+		list=addHospital(data, list);
+		
 		boolean mas=true;
 		while(mas) {
 			System.out.println("Desea introducir datos de otro hospital");
 			inFromUser = new BufferedReader(new InputStreamReader(System.in));
 			String resp = inFromUser.readLine().toLowerCase();
-			if(resp.equals("si"))addHospital(file);
+			if(resp.equals("si")) {
+				System.out.println("Introduzca los datos de un hospital separados por espacios ");
+				inFromUser = new BufferedReader(new InputStreamReader(System.in));
+				data = inFromUser.readLine();
+				list=addHospital(data, list);
+			}
 			else mas=false;
 		}
+		writeArrayList(file, list);
 	}
 	
-	private static void addHospital(String file) throws IOException 
+	private static ArrayList<String> addHospital(String data, ArrayList<String> list)  
 	{
-		OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file));
-		BufferedWriter bufWriter = new BufferedWriter(writer);
-		System.out.println("Introduzca los datos de un hospital separados por espacios ");
-		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-		String data = inFromUser.readLine();
-		bufWriter.newLine();
-		bufWriter.write(data);
-		bufWriter.close();
+		list.add(data);
+		return list;
 	}
 
 		      
