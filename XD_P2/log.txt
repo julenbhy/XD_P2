@@ -1,1 +1,6 @@
-Se ha abierto el servidor a las 2020/11/04 14:12:23
+Thu Nov 05 12:59:00 CET 2020  Se estableción conexión con el servidor
+Thu Nov 05 12:59:11 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 10 10 10 10
+Thu Nov 05 12:59:11 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 8 8 8 8
+Thu Nov 05 12:59:11 CET 2020  El servidor calculo las medias: 9 9 9 9
+Thu Nov 05 12:59:11 CET 2020  El servidor envió las medias al cliente
+Thu Nov 05 12:59:11 CET 2020  El servidor terminó la conexión con el cliente

@@ -1,20 +1,21 @@
 package Server;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AttendPetition extends Thread{
 	Socket connectionSocket;
+	BufferedWriter bufWriter;
 	
 	ArrayList<Integer> casos = new ArrayList<Integer>();
 	ArrayList<Integer> muertos = new ArrayList<Integer>();
 	ArrayList<Integer> uci = new ArrayList<Integer>();
 	ArrayList<Integer> bajas = new ArrayList<Integer>();
 	
-	public AttendPetition(Socket s){
+	public AttendPetition(Socket s, BufferedWriter bufWriter){
 		this.connectionSocket=s;
+		this.bufWriter=bufWriter;
 	}
 	
 	public void run(){
@@ -27,25 +28,32 @@ public class AttendPetition extends Thread{
 		try {
 			inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-
+			
 
 			//leemos las lineas que se nos envian hasta encontrar el centinela
 			while((line = inFromClient.readLine())!=null && !line.equals("@")){
+				bufWriter.write( Calendar.getInstance().getTime().toString() + "  Se estableción conexión con un cliente y obtuvo los datos: "+line+"\n");
 			    clientSentence.add(line);
 			    System.out.println(line);
+			    
 			    
 			}
 			
 			separarDatos(clientSentence);
 			
 			resultado = obtenerResultado();
+			bufWriter.write( Calendar.getInstance().getTime().toString() + "  El servidor calculo las medias: "+resultado+"\n");
 
 			
 			outToClient.writeBytes(resultado + '\n');
+			
+			bufWriter.write( Calendar.getInstance().getTime().toString() + "  El servidor envió las medias al cliente\n");
 
 			
 			
 			this.connectionSocket.close();
+			bufWriter.write( Calendar.getInstance().getTime().toString() + "  El servidor terminó la conexión con el cliente\n");
+			bufWriter.flush();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Ha saltado la excepcion");
