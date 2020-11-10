@@ -14,7 +14,7 @@ class TCPServerMultiThreading {
 		OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("log.txt"));
 		BufferedWriter bufWriter = new BufferedWriter(writer);
 		bufWriter.write( Calendar.getInstance().getTime().toString() + "  Se estableción conexión con el servidor\n");
-		
+		 
 		 
 		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();

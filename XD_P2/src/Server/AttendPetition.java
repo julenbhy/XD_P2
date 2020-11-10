@@ -13,6 +13,8 @@ public class AttendPetition extends Thread{
 	ArrayList<Integer> uci = new ArrayList<Integer>();
 	ArrayList<Integer> bajas = new ArrayList<Integer>();
 	
+	boolean corr=true;
+	
 	public AttendPetition(Socket s, BufferedWriter bufWriter){
 		this.connectionSocket=s;
 		this.bufWriter=bufWriter;
@@ -31,7 +33,7 @@ public class AttendPetition extends Thread{
 			
 
 			//leemos las lineas que se nos envian hasta encontrar el centinela
-			while((line = inFromClient.readLine())!=null && !line.equals("@")){
+			while(((line = inFromClient.readLine())!=null && !line.equals("@"))&&corr){
 				bufWriter.write( Calendar.getInstance().getTime().toString() + "  Se estableción conexión con un cliente y obtuvo los datos: "+line+"\n");
 			    clientSentence.add(line);
 			    System.out.println(line);
@@ -42,12 +44,19 @@ public class AttendPetition extends Thread{
 			separarDatos(clientSentence);
 			
 			resultado = obtenerResultado();
-			bufWriter.write( Calendar.getInstance().getTime().toString() + "  El servidor calculo las medias: "+resultado+"\n");
+			if(this.corr)
+			{
+				bufWriter.write( Calendar.getInstance().getTime().toString() + "  El servidor calculo las medias: "+resultado+"\n");
 
-			
-			outToClient.writeBytes(resultado + '\n');
-			
-			bufWriter.write( Calendar.getInstance().getTime().toString() + "  El servidor envió las medias al cliente\n");
+				
+				outToClient.writeBytes(resultado + '\n');
+				
+				bufWriter.write( Calendar.getInstance().getTime().toString() + "  El servidor envió las medias al cliente\n");
+			}
+			else
+			{
+				bufWriter.write( Calendar.getInstance().getTime().toString() + "  ERROR EN LA CARGA DE DATOS\n");
+			}
 
 			
 			
@@ -70,12 +79,17 @@ public class AttendPetition extends Thread{
 
 		String [] aux;
 		
+		try {
 		for(String str: clientSentence) {
 			aux = str.split(" ");
 			this.casos.add(Integer.parseInt(aux[0]));
 			this.muertos.add(Integer.parseInt(aux[1]));
 			this.uci.add(Integer.parseInt(aux[2]));
 			this.bajas.add(Integer.parseInt(aux[3]));
+		}}
+		catch(Exception e)
+		{
+			this.corr=false;
 		}
 	}
 	
@@ -101,11 +115,17 @@ public class AttendPetition extends Thread{
 	private String calcularMedia(ArrayList <Integer> list) {
 	  Integer sum = 0;
 	  
+	  try {
 	  for (Integer elem : list) {
 	      sum += elem;
 	  }
 	  
-	  sum =  sum / list.size();
+	  sum =  sum / list.size();}
+	  
+	  catch(Exception e)
+	  {
+		  this.corr=false;
+	  }
 	  return Integer.toString(sum);
 	}
 }

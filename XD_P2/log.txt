@@ -1,6 +1,15 @@
-Thu Nov 05 12:59:00 CET 2020  Se estableción conexión con el servidor
-Thu Nov 05 12:59:11 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 10 10 10 10
-Thu Nov 05 12:59:11 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 8 8 8 8
-Thu Nov 05 12:59:11 CET 2020  El servidor calculo las medias: 9 9 9 9
-Thu Nov 05 12:59:11 CET 2020  El servidor envió las medias al cliente
-Thu Nov 05 12:59:11 CET 2020  El servidor terminó la conexión con el cliente
+Tue Nov 10 01:17:48 CET 2020  Se estableción conexión con el servidor
+Tue Nov 10 01:18:07 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 1 2 3 4
+Tue Nov 10 01:18:07 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 5 6 7 8
+Tue Nov 10 01:18:07 CET 2020  El servidor calculo las medias: 3 4 5 6
+Tue Nov 10 01:18:07 CET 2020  El servidor envió las medias al cliente
+Tue Nov 10 01:18:07 CET 2020  El servidor terminó la conexión con el cliente
+Tue Nov 10 01:18:14 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 1 2 3 4
+Tue Nov 10 01:18:14 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 1 2 3 4
+Tue Nov 10 01:18:14 CET 2020  El servidor calculo las medias: 1 2 3 4
+Tue Nov 10 01:18:14 CET 2020  El servidor envió las medias al cliente
+Tue Nov 10 01:18:14 CET 2020  El servidor terminó la conexión con el cliente
+Tue Nov 10 01:18:47 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: 8 8 8 6
+Tue Nov 10 01:18:47 CET 2020  Se estableción conexión con un cliente y obtuvo los datos: w e r t
+Tue Nov 10 01:18:47 CET 2020  ERROR EN LA CARGA DE DATOS
+Tue Nov 10 01:18:47 CET 2020  El servidor terminó la conexión con el cliente

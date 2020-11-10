@@ -34,7 +34,11 @@ class TCPClient {
 		
 		answer = inFromServer.readLine();
 		
-		System.out.println("FROM SERVER: " + answer);
+		if(answer != null)
+		{
+			System.out.println("FROM SERVER: " + answer);
+		}
+		
 		clientSocket.close();
 	}
 	
